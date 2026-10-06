@@ -203,6 +203,7 @@ dialog::backdrop{background:rgba(5,6,7,.94)}
 dialog figure{margin:0}
 dialog img{width:100%;border-radius:10px}
 dialog figcaption{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;padding-top:18px}
+@media (max-width:620px){dialog figcaption{flex-direction:column;align-items:stretch;gap:14px}dialog figcaption > div:first-child{text-align:left}.vb{justify-content:space-between;width:100%}.vb button{flex:1;min-width:0}}
 dialog figcaption b{font-size:24px;font-weight:600;letter-spacing:-.02em}
 dialog figcaption small{display:block;color:var(--fg-3);font-size:14px;margin-top:2px}
 .vb{display:flex;gap:8px}
