@@ -199,7 +199,7 @@ footer{border-top:1px solid var(--line);color:var(--fg-3);font-size:14px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-block:28px}
 
 /* viewer */
-dialog{border:0;padding:0;background:transparent;max-width:min(1500px,95vw);width:100%;color:var(--fg)}
+dialog{border:0;padding:0;background:transparent;max-width:min(1500px,95vw);width:100%;color:var(--fg);touch-action:manipulation}
 dialog::backdrop{background:rgba(5,6,7,.94)}
 dialog figure{margin:0}
 dialog img{width:100%;border-radius:10px}
@@ -504,9 +504,10 @@ function show(i){cur=i;const[f,n]=S[i];const im=document.getElementById('vImg');
   document.getElementById('vNum').textContent='Board '+String(i+1).padStart(2,'0')+' of '+S.length;}
 function step(d){const v=visible();const k=v.indexOf(cur);show(v[(k+d+v.length)%v.length]);}
 function openV(i){show(i);if(V.showModal)V.showModal();else V.setAttribute('open','');}
-document.getElementById('vPrev').onclick=()=>step(-1);
-document.getElementById('vNext').onclick=()=>step(1);
-document.getElementById('vClose').onclick=()=>V.close();
+function fastTap(el,fn){let locked=false;el.addEventListener('pointerdown',e=>{if(locked)return;locked=true;e.preventDefault();fn();setTimeout(()=>locked=false,80);});el.addEventListener('click',e=>e.preventDefault());}
+fastTap(document.getElementById('vPrev'),()=>step(-1));
+fastTap(document.getElementById('vNext'),()=>step(1));
+fastTap(document.getElementById('vClose'),()=>V.close());
 V.addEventListener('click',e=>{if(e.target===V)V.close();});
 V.addEventListener('keydown',e=>{if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1);});
 
